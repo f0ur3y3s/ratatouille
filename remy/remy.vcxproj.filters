@@ -15,7 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="remy.cpp">
+    <ClCompile Include="remy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\remy.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\net.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\debug.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\cli.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
