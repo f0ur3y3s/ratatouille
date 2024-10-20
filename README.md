@@ -14,6 +14,7 @@ Remy is a RAT written in C for Windows and contains the following features:
 - Download files
 - Interactive CLI
 - Bulk commands to multiple clients
+- Create tunnels through specified clients to a target
 
 The C2 server will be created with cli or raylib.
 
