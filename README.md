@@ -1,14 +1,15 @@
-# Remy
+# Ratatouille
 
-- [Remy](#remy)
-  - [TODO](#todo)
+- [Ratatouille](#ratatouille)
+  - [Remy](#remy)
+  - [Linguini](#linguini)
   - [Building](#building)
   - [Usage](#usage)
   - [References](#references)
 
-![remy the rat](https://static.wikia.nocookie.net/p__/images/7/70/Remy.png/revision/latest?cb=20211110135646&path-prefix=protagonist)
+![Remy and Linguini](https://static.wikia.nocookie.net/disney/images/5/5b/Remy_and_Alfredo_Linguini.png/revision/latest/scale-to-width-down/250?cb=20210501224710)
 
-Remy is a RAT written in C for Windows and contains the following features:
+Ratatouille is a RAT and C2 written in C for Windows and contains the following features:
 
 - List files
 - Upload files
@@ -17,13 +18,17 @@ Remy is a RAT written in C for Windows and contains the following features:
 - Bulk commands to multiple clients
 - Create tunnels through specified clients to a target
 
-The C2 server will be created with cli or raylib.
+## Remy
 
-The implant is named `Linguini`, capable of installing as a service to beacon out at intervals.
+Remy is the C2 server, capable of handling multiple clients and sending commands to them.
 
-## TODO
+## Linguini
 
-- Find a suitable unit test framework
+Linguini is the RAT client, capable of receiving commands from the C2 server and executing them.
+
+Linguini can be ran in two modes:
+- CLI
+- Service
 
 ## Building
 
