@@ -1,6 +1,7 @@
 # Remy
 
 - [Remy](#remy)
+  - [TODO](#todo)
   - [Building](#building)
   - [Usage](#usage)
   - [References](#references)
@@ -17,6 +18,12 @@ Remy is a RAT written in C for Windows and contains the following features:
 - Create tunnels through specified clients to a target
 
 The C2 server will be created with cli or raylib.
+
+The implant is named `Linguini`, capable of installing as a service to beacon out at intervals.
+
+## TODO
+
+- Find a suitable unit test framework
 
 ## Building
 
