@@ -1,8 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: MSBuild
 
 on:
@@ -12,13 +7,9 @@ on:
     branches: [ "master" ]
 
 env:
-  # Path to the solution file relative to the root of the project.
   LINGUINI_FILE_PATH: linguini\linguini.sln
   REMY_FILE_PATH: remy\remy.sln
 
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Debug
 
 permissions:
@@ -40,7 +31,13 @@ jobs:
 
     - name: Build linguini solution
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild ${{env.LINGUINI_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /fl /flp:logfile=linguini_msbuild.log;verbosity=diagnostic
+      run: msbuild ${{env.LINGUINI_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl -flp:logfile=linguini_msbuild.log;verbosity=Normal
+
+    - name: Upload linguini build log
+      uses: actions/upload-artifact@v4
+      with:
+        name: linguini_build_log
+        path: linguini_msbuild.log
 
     - name: Upload linguini artifacts
       uses: actions/upload-artifact@v4
@@ -62,11 +59,16 @@ jobs:
 
     - name: Build remy solution
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild ${{env.REMY_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /fl /flp:logfile=remy_msbuild.log;verbosity=diagnostic
+      run: msbuild ${{env.REMY_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl -flp:logfile=remy_msbuild.log;verbosity=Normal
+
+    - name: Upload remy build log
+      uses: actions/upload-artifact@v4
+      with:
+      name: remy_build_log
+      path: remy_msbuild.log
 
     - name: Upload remy artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: remy
-        path: remy/bin/${{env.BUILD_CONFIGURATION}}
-
+      name: remy
+      path: remy/bin/${{env.BUILD_CONFIGURATION}}
