@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef DEBUG_H
+#define DEBUG_H
+
 #define WIN32_LEAN_AND_MEAN
 
 #include <Windows.h>
@@ -11,3 +14,6 @@
 
 VOID  log_debug (const char * fmt, ...);
 DWORD log_last_error (BOOL is_wsa);
+
+#endif
+/*** EOF ***/

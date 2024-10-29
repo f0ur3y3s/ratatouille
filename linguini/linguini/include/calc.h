@@ -2,13 +2,7 @@
 
 #include <Windows.h>
 
-#ifdef __cplusplus
+INT add (INT a, INT b);
+INT subtract (INT a, INT b);
+INT multiply (INT a, INT b);
 
-#endif
-
-    INT add (INT a, INT b);
-    INT subtract (INT a, INT b);
-    INT multiply (INT a, INT b);
-
-#ifdef __cplusplus
-#endif
