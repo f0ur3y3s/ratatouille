@@ -1,30 +1,22 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: MSBuild
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "test_build" ]
   pull_request:
     branches: [ "master" ]
 
 env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: linguini\linguini.sln
+  LINGUINI_FILE_PATH: linguini\linguini.sln
+  REMY_FILE_PATH: remy\remy.sln
 
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Debug
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  build_linguini:
     runs-on: windows-latest
 
     steps:
@@ -33,12 +25,51 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Restore NuGet packages
+    - name: Restore NuGet packages for linguini
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+      run: nuget restore ${{env.LINGUINI_FILE_PATH}}
 
-    - name: Build
+    - name: Build linguini solution
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild ${{env.LINGUINI_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl "-flp:logfile=linguini_msbuild.log;verbosity=Normal"
+
+    - name: Upload linguini build log
+      uses: actions/upload-artifact@v4
+      with:
+        name: linguini_build_log
+        path: linguini_msbuild.log
+
+    # - name: Upload linguini artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: linguini
+    #     path: linguini/bin/${{env.BUILD_CONFIGURATION}}
+
+  build_remy:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore NuGet packages for remy
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.REMY_FILE_PATH}}
+
+    - name: Build remy solution
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild ${{env.REMY_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl "-flp:logfile=remy_msbuild.log;verbosity=Normal"
+
+    - name: Upload remy build log
+      uses: actions/upload-artifact@v4
+      with:
+        name: remy_build_log
+        path: remy_msbuild.log
+
+    # - name: Upload remy artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: remy
+    #     path: remy/bin/${{env.BUILD_CONFIGURATION}}
