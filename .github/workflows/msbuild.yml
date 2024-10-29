@@ -44,6 +44,7 @@ jobs:
       with:
         name: linguini
         path: linguini/bin/${{env.BUILD_CONFIGURATION}}
+
   build_remy:
     runs-on: windows-latest
 
@@ -64,11 +65,11 @@ jobs:
     - name: Upload remy build log
       uses: actions/upload-artifact@v4
       with:
-      name: remy_build_log
-      path: remy_msbuild.log
+        name: remy_build_log
+        path: remy_msbuild.log
 
     - name: Upload remy artifacts
       uses: actions/upload-artifact@v4
       with:
-      name: remy
-      path: remy/bin/${{env.BUILD_CONFIGURATION}}
+        name: remy
+        path: remy/bin/${{env.BUILD_CONFIGURATION}}
