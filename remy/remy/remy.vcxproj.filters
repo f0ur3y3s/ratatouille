@@ -27,12 +27,6 @@
     <ClCompile Include="src\net.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\debug.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\debug.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cli.c">
       <Filter>Source Files</Filter>
     </ClCompile>

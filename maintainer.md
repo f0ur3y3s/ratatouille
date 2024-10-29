@@ -34,7 +34,21 @@
 
 ## Multi-line Packets
 
+`protocol "segment_len: 32, data (variable): 24, 0x1F: 8, segment_len: 32, data (variable): 24, 0x1F: 8"`
 
+```
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          segment_len                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                 data (variable)               |      0x1F     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                           segment_len                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                 data (variable)               |      0x1F     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
 
 ## Commands
 
@@ -44,11 +58,12 @@
 |        | `0x01` | Query status    |
 |        | `0x02` | Query uptime    |
 | `0x02` |        | File I/O        |
-|        | `0x01` | List file       |
+|        | `0x01` | List            |
 |        | `0x02` | Upload file     |
 |        | `0x03` | Download file   |
 | `0x03` |        | Execute command |
 | `0x0F` |        | Interactive CLI |
+| `0x10` |        | Link tunnel     |
 | `0xFF` | N/A    | Stop remy       |
 
 TODO: Link tunnel and pass onto next machine
