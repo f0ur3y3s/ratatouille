@@ -31,7 +31,7 @@ jobs:
 
     - name: Build linguini solution
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild ${{env.LINGUINI_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl -flp:logfile=linguini_msbuild.log;verbosity=Normal
+      run: msbuild ${{env.LINGUINI_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl "-flp:logfile=linguini_msbuild.log;verbosity=Normal"
 
     - name: Upload linguini build log
       uses: actions/upload-artifact@v4
@@ -39,11 +39,11 @@ jobs:
         name: linguini_build_log
         path: linguini_msbuild.log
 
-    - name: Upload linguini artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: linguini
-        path: linguini/bin/${{env.BUILD_CONFIGURATION}}
+    # - name: Upload linguini artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: linguini
+    #     path: linguini/bin/${{env.BUILD_CONFIGURATION}}
 
   build_remy:
     runs-on: windows-latest
@@ -60,7 +60,7 @@ jobs:
 
     - name: Build remy solution
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild ${{env.REMY_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl -flp:logfile=remy_msbuild.log;verbosity=Normal
+      run: msbuild ${{env.REMY_FILE_PATH}} /p:Configuration=${{ env.BUILD_CONFIGURATION }} -v:Normal -fl "-flp:logfile=remy_msbuild.log;verbosity=Normal"
 
     - name: Upload remy build log
       uses: actions/upload-artifact@v4
@@ -68,8 +68,8 @@ jobs:
         name: remy_build_log
         path: remy_msbuild.log
 
-    - name: Upload remy artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: remy
-        path: remy/bin/${{env.BUILD_CONFIGURATION}}
+    # - name: Upload remy artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: remy
+    #     path: remy/bin/${{env.BUILD_CONFIGURATION}}
