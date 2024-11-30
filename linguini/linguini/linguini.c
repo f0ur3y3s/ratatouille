@@ -87,10 +87,27 @@ static VOID WINAPI svc_ctrl_handler (DWORD dw_ctrl)
 
 static VOID svc_init (DWORD num_args, LPWSTR * lp_args)
 {
+    gh_svc_stop_event = CreateEventW(NULL, TRUE, FALSE, NULL);
+
+    if (!gh_svc_stop_event)
+    {
+        svc_report_event(SVCNAME, __FUNCTIONW__, L"CreateEvent failed");
+        return;
+    }
+
     svc_report_status(
         &g_svc_status, &gh_svc_status, SERVICE_RUNNING, NO_ERROR, 0);
     svc_report_event(SVCNAME, __FUNCTIONW__, L"I'm a chef!");
     log_debug("Im a chef!");
+
+    for (;;)
+    {
+        WaitForSingleObject(gh_svc_stop_event, INFINITE);
+        svc_report_event(SVCNAME, __FUNCTIONW__, L"Service stopped");
+        svc_report_status(
+            &g_svc_status, &gh_svc_status, SERVICE_STOPPED, NO_ERROR, 0);
+        return;
+    }
     svc_report_status(
         &g_svc_status, &gh_svc_status, SERVICE_STOPPED, NO_ERROR, 0);
     return;
